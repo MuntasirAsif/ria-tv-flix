@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:go_router/go_router.dart';
@@ -52,7 +53,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (!_controller.value.isInitialized) return;
     final value = _controller.value;
     final buffered = value.buffered.isNotEmpty
-        ? value.buffered.last.end.inMilliseconds / value.duration.inMilliseconds
+        ? value.buffered.last.end.inMilliseconds /
+            value.duration.inMilliseconds
         : 0.0;
     setState(() {
       _isPlaying = value.isPlaying;
@@ -152,41 +154,61 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       children: [
                         Text(
                           widget.content.title,
-                          style: context.textStyle.headingSmall,
+                          style: context.textStyle.headingSmall.copyWith(
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.3,
+                          ),
                         ),
-                        6.verticalSpace,
+                        8.verticalSpace,
                         Row(
                           children: [
                             Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 8.r,
-                                vertical: 3.r,
+                                vertical: 4.r,
                               ),
                               decoration: BoxDecoration(
-                                color: context.color.primary.withValues(
-                                  alpha: 0.1,
-                                ),
+                                color: context.color.primary.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(4.r),
                               ),
                               child: Text(
                                 widget.content.category,
                                 style: context.textStyle.bodySmall.copyWith(
                                   color: context.color.primary,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
                             8.horizontalSpace,
-                            Icon(
-                              Icons.calendar_today,
-                              size: 12,
-                              color: context.color.icon,
-                            ),
-                            4.horizontalSpace,
-                            Text(
-                              widget.content.publishDate,
-                              style: context.textStyle.bodySmall.copyWith(
-                                color: context.color.icon,
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.r,
+                                vertical: 4.r,
+                              ),
+                              decoration: BoxDecoration(
+                                color: context.color.icon.withValues(alpha: 0.06),
+                                borderRadius: BorderRadius.circular(4.r),
+                                border: Border.all(
+                                  color: context.color.icon.withValues(alpha: 0.1),
+                                  width: 0.5,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.calendarDays,
+                                    size: 10,
+                                    color: context.color.icon,
+                                  ),
+                                  4.horizontalSpace,
+                                  Text(
+                                    widget.content.publishDate,
+                                    style: context.textStyle.bodySmall.copyWith(
+                                      color: context.color.icon,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -200,7 +222,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       horizontal: context.padding.p16.r,
                     ),
                     child: Divider(
-                      color: context.color.icon.withValues(alpha: 0.15),
+                      color: context.color.icon.withValues(alpha: 0.12),
                       height: 1,
                     ),
                   ),
@@ -211,15 +233,53 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ),
                     child: Row(
                       children: [
+                        Container(
+                          width: 3.r,
+                          height: 16.r,
+                          decoration: BoxDecoration(
+                            color: context.color.primary,
+                            borderRadius: BorderRadius.circular(2.r),
+                          ),
+                        ),
+                        8.horizontalSpace,
                         Text(
                           'Recommended',
-                          style: context.textStyle.headingSmall,
+                          style: context.textStyle.headingSmall.copyWith(
+                            letterSpacing: 0.3,
+                          ),
                         ),
                         const Spacer(),
-                        Text(
-                          'See All',
-                          style: context.textStyle.bodyMedium.copyWith(
-                            color: context.color.primary,
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.r,
+                            vertical: 4.r,
+                          ),
+                          decoration: BoxDecoration(
+                            color: context.color.primary.withValues(alpha: 0.08),
+                            borderRadius: BorderRadius.circular(20.r),
+                            border: Border.all(
+                              color: context.color.primary.withValues(alpha: 0.15),
+                              width: 0.5,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'See All',
+                                style: context.textStyle.bodyMedium.copyWith(
+                                  color: context.color.primary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11.sp,
+                                ),
+                              ),
+                              4.horizontalSpace,
+                              FaIcon(
+                                FontAwesomeIcons.chevronRight,
+                                size: 8,
+                                color: context.color.primary,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -233,7 +293,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     child: GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      padding: .zero,
+                      padding: EdgeInsets.zero,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -248,45 +308,82 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           onTap: () =>
                               context.push(RouteConst.videoPlayer, extra: item),
                           child: Container(
-                            clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.r),
-                              color: context.color.secondary.withValues(
-                                alpha: 0.08,
-                              ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: context.color.primary.withValues(
-                                    alpha: 0.06,
-                                  ),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
+                                  color: context.color.primary.withValues(alpha: 0.08),
+                                  blurRadius: 12.r,
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: CustomNetworkImage(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12.r),
+                              child: Stack(
+                                children: [
+                                  CustomNetworkImage(
                                     imageUrl: item.thumbnailUrl,
                                     height: double.infinity,
                                     width: double.infinity,
                                     radius: 0,
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.r),
-                                  child: Text(
-                                    item.title,
-                                    style: context.textStyle.bodySmall.copyWith(
-                                      fontWeight: FontWeight.w500,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.transparent,
+                                          Colors.black.withValues(alpha: 0.4),
+                                        ],
+                                      ),
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                              ],
+                                  Positioned(
+                                    right: 6.r,
+                                    bottom: 6.r,
+                                    child: Container(
+                                      padding: EdgeInsets.all(6.r),
+                                      decoration: BoxDecoration(
+                                        color: context.color.primary,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: context.color.primary
+                                                .withValues(alpha: 0.4),
+                                            blurRadius: 6.r,
+                                          ),
+                                        ],
+                                      ),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.play,
+                                        size: 10,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.r),
+                                      child: Text(
+                                        item.title,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11.sp,
+                                          fontWeight: FontWeight.w600,
+                                          letterSpacing: 0.3,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -369,21 +466,25 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 top: 0,
                 child: SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.r),
+                    padding: EdgeInsets.symmetric(horizontal: 8.r),
                     child: Row(
                       children: [
                         IconButton(
                           onPressed: () => Navigator.pop(context),
                           icon: Container(
-                            padding: EdgeInsets.all(6.r),
+                            padding: EdgeInsets.all(8.r),
                             decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.3),
-                              shape: BoxShape.circle,
+                              color: Colors.white.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.15),
+                                width: 0.5,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.arrow_back,
+                            child: const FaIcon(
+                              FontAwesomeIcons.arrowLeft,
                               color: Colors.white,
-                              size: 20,
+                              size: 16,
                             ),
                           ),
                         ),
@@ -391,15 +492,19 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         IconButton(
                           onPressed: _showSettingsSheet,
                           icon: Container(
-                            padding: EdgeInsets.all(6.r),
+                            padding: EdgeInsets.all(8.r),
                             decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.3),
-                              shape: BoxShape.circle,
+                              color: Colors.white.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.15),
+                                width: 0.5,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.settings,
+                            child: const FaIcon(
+                              FontAwesomeIcons.gear,
                               color: Colors.white,
-                              size: 20,
+                              size: 16,
                             ),
                           ),
                         ),
@@ -491,49 +596,61 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         icon: Container(
                           padding: EdgeInsets.all(8.r),
                           decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.3),
-                            shape: BoxShape.circle,
+                            color: Colors.white.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.15),
+                              width: 0.5,
+                            ),
                           ),
-                          child: const Icon(
-                            Icons.replay_10,
+                          child: const FaIcon(
+                            FontAwesomeIcons.rotateLeft,
                             color: Colors.white,
-                            size: 22,
+                            size: 18,
                           ),
                         ),
                       ),
-                      32.horizontalSpace,
+                      24.horizontalSpace,
                       GestureDetector(
                         onTap: _togglePlayPause,
                         child: Container(
+                          width: 52.r,
+                          height: 52.r,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.white.withValues(alpha: 0.25),
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.3),
-                              width: 2,
-                            ),
+                            color: context.color.primary,
+                            boxShadow: [
+                              BoxShadow(
+                                color: context.color.primary.withValues(alpha: 0.4),
+                                blurRadius: 12.r,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
-                          padding: EdgeInsets.all(14.r),
                           child: Icon(
                             _isPlaying ? Icons.pause : Icons.play_arrow,
                             color: Colors.white,
-                            size: 32,
+                            size: 28,
                           ),
                         ),
                       ),
-                      32.horizontalSpace,
+                      24.horizontalSpace,
                       IconButton(
                         onPressed: () => _seekRelative(10),
                         icon: Container(
                           padding: EdgeInsets.all(8.r),
                           decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.3),
-                            shape: BoxShape.circle,
+                            color: Colors.white.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.15),
+                              width: 0.5,
+                            ),
                           ),
-                          child: const Icon(
-                            Icons.forward_10,
+                          child: const FaIcon(
+                            FontAwesomeIcons.rotateRight,
                             color: Colors.white,
-                            size: 22,
+                            size: 18,
                           ),
                         ),
                       ),
@@ -600,9 +717,8 @@ class _SettingsSheetState extends State<_SettingsSheet> {
                       color: isSelected
                           ? context.color.onPrimary
                           : context.color.text.secondary,
-                      fontWeight: isSelected
-                          ? FontWeight.w600
-                          : FontWeight.w400,
+                      fontWeight:
+                          isSelected ? FontWeight.w600 : FontWeight.w400,
                     ),
                   ),
                 ),
@@ -630,9 +746,8 @@ class _SettingsSheetState extends State<_SettingsSheet> {
                     color: quality == 'Auto'
                         ? context.color.onPrimary
                         : context.color.text.secondary,
-                    fontWeight: quality == 'Auto'
-                        ? FontWeight.w600
-                        : FontWeight.w400,
+                    fontWeight:
+                        quality == 'Auto' ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               );
