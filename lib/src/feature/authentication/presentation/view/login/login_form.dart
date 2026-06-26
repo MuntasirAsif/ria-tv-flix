@@ -115,35 +115,8 @@ class SignInForm extends StatelessWidget {
               return SizedBox(
                 height: 48.h,
                 child: FilledButton(
-                  onPressed: () async {
-                    // if (formKey.currentState!.validate()) {
-                    //   await ref
-                    //       .read(loginViewModelProvider.notifier)
-                    //       .login(
-                    //         LoginModel(
-                    //           email: emailController.text.trim(),
-                    //           password: passwordController.text,
-                    //         ),
-                    //         rememberMe: ref.read(loginRememberMeProvider),
-                    //       );
-
-                    //   if (!context.mounted) return;
-
-                    //   final loginState = ref.read(loginViewModelProvider);
-                    //   if (loginState.hasError) {
-                    //     CustomToast.showError(
-                    //       context,
-                    //       title: 'Error',
-                    //       description: loginState.error.toString(),
-                    //     );
-                    //   } else {
-                    //     CustomToast.showSuccess(
-                    //       context,
-                    //       title: 'Success',
-                    //       description: 'Login successfully!',
-                    //     );
-                    //   }
-                    // }
+                  onPressed: () {
+                    context.go(RouteConst.homeScreen);
                   },
                   child: state.when(
                     data: (data) {

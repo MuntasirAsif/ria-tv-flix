@@ -7,4 +7,8 @@ class RouteConst {
   static const String otpScreen = '/otp_screen';
   static const String resetPassword = '/reset_password';
   static const String homeScreen = '/home_screen';
+  static const String categoriesScreen = '/categories_screen';
+  static const String tvScreen = '/tv_screen';
+  static const String premiumScreen = '/premium_screen';
+  static const String profileScreen = '/profile_screen';
 }

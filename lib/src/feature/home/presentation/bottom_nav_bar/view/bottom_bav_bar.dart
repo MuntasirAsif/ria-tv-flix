@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart' show FaIcon, FaIconData, FontAwesomeIcons;
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../core/gen/assets.gen.dart';
 import '../../../../../../core/static/theme/theme.dart';
 
 class AppBottomNavBar extends StatefulWidget {
@@ -61,19 +60,37 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
             onDestinationSelected: _onTabChanged,
             indicatorColor: context.color.primary.withValues(alpha: 0.1),
             destinations: [
-              _navItem(0, Assets.icons.home, 'Home', color, currentIndex),
-              _navItem(1, Assets.icons.task, 'Habit', color, currentIndex),
-              _navItem(2, Assets.icons.book, 'Study', color, currentIndex),
+              _navItem(
+                0,
+                FontAwesomeIcons.house,
+                'Home',
+                color,
+                currentIndex,
+              ),
+              _navItem(
+                1,
+                FontAwesomeIcons.tableCellsLarge,
+                'Categories',
+                color,
+                currentIndex,
+              ),
+              _navItem(
+                2,
+                FontAwesomeIcons.tv,
+                'TV',
+                color,
+                currentIndex,
+              ),
               _navItem(
                 3,
-                Assets.icons.userGroup,
-                'Community',
+                FontAwesomeIcons.crown,
+                'Premium',
                 color,
                 currentIndex,
               ),
               _navItem(
                 4,
-                Assets.icons.user,
+                FontAwesomeIcons.user,
                 'Profile',
                 color,
                 currentIndex,
@@ -87,7 +104,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
 
   NavigationDestination _navItem(
     int index,
-    String asset,
+    FaIconData icon,
     String label,
     ColorScheme color,
     int currentIndex,
@@ -97,7 +114,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     return NavigationDestination(
       icon: _NavItem(
         key: ValueKey(index),
-        asset: asset,
+        icon: icon,
         label: label,
         isSelected: isSelected,
         color: color.onSurface.withValues(alpha: 0.5),
@@ -105,7 +122,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
       ),
       selectedIcon: _NavItem(
         key: ValueKey("selected_$index"),
-        asset: asset,
+        icon: icon,
         label: label,
         isSelected: true,
         color: color.primary,
@@ -117,7 +134,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
 }
 
 class _NavItem extends StatefulWidget {
-  final String asset;
+  final FaIconData icon;
   final String label;
   final bool isSelected;
   final Color color;
@@ -125,7 +142,7 @@ class _NavItem extends StatefulWidget {
 
   const _NavItem({
     super.key,
-    required this.asset,
+    required this.icon,
     required this.label,
     required this.isSelected,
     required this.color,
@@ -190,10 +207,10 @@ class _NavItemState extends State<_NavItem>
         mainAxisSize: MainAxisSize.min,
         children: [
           15.verticalSpace,
-          SvgPicture.asset(
-            widget.asset,
-            height: 22,
-            colorFilter: ColorFilter.mode(widget.color, BlendMode.srcIn),
+          FaIcon(
+            widget.icon,
+            size: 22,
+            color: widget.color,
           ),
           4.verticalSpace,
           Text(
@@ -240,7 +257,6 @@ class _ExitConfirmDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Icon badge
             Container(
               padding: EdgeInsets.all(16.r),
               decoration: BoxDecoration(

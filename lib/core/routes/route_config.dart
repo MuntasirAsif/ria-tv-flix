@@ -73,12 +73,43 @@ final routerProvider = Provider<GoRouter>((ref) {
 });
 
 List<StatefulShellBranch> bottomBranches = [
-  // Home
   StatefulShellBranch(
     routes: [
       GoRoute(
         path: RouteConst.homeScreen,
-        builder: (context, state) => Scaffold(),
+        builder: (context, state) => const HomeScreen(),
+      ),
+    ],
+  ),
+  StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: RouteConst.categoriesScreen,
+        builder: (context, state) => const CategoriesScreen(),
+      ),
+    ],
+  ),
+  StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: RouteConst.tvScreen,
+        builder: (context, state) => const TvScreen(),
+      ),
+    ],
+  ),
+  StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: RouteConst.premiumScreen,
+        builder: (context, state) => const PremiumScreen(),
+      ),
+    ],
+  ),
+  StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: RouteConst.profileScreen,
+        builder: (context, state) => const ProfileScreen(),
       ),
     ],
   ),
