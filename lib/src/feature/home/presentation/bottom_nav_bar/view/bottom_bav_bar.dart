@@ -197,7 +197,7 @@ class _NavItemState extends State<_NavItem>
         mainAxisSize: MainAxisSize.min,
         children: [
           15.verticalSpace,
-          FaIcon(widget.icon, size: 22, color: widget.color),
+          FaIcon(widget.icon, size: 22, color: widget.color, weight: 0.5),
           4.verticalSpace,
           Text(
             widget.label,
