@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-
 class MultiSelectDropdown extends StatefulWidget {
   final List<String> items;
   final List<String> selectedItems;

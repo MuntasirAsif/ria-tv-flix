@@ -55,6 +55,14 @@ final routerProvider = Provider<GoRouter>((ref) {
           type: AppTransitionType.rightToLeft,
         ),
       ),
+      GoRoute(
+        path: RouteConst.videoPlayer,
+        pageBuilder: (context, state) => buildTransitionPage(
+          child: VideoPlayerScreen(content: state.extra as ContentModel),
+          key: state.pageKey,
+          type: AppTransitionType.bottomToTop,
+        ),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return Consumer(

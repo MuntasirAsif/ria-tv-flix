@@ -12,7 +12,9 @@ class ChangePasswordScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Change Password")),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: const Dimensions().padding.p16.w),
+        padding: EdgeInsets.symmetric(
+          horizontal: const Dimensions().padding.p16.w,
+        ),
         child: Column(
           children: [
             Align(
@@ -65,7 +67,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     color: context.color.primary,
                   ),
                 ),
-                suffixIcon: const Icon(Icons.remove_red_eye_outlined),  
+                suffixIcon: const Icon(Icons.remove_red_eye_outlined),
               ),
             ),
             20.verticalSpace,

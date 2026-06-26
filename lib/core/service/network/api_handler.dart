@@ -10,7 +10,8 @@ class Api {
   }) async {
     try {
       final result = await action;
-      if (result.response.statusCode == 200 || result.response.statusCode == 201) {
+      if (result.response.statusCode == 200 ||
+          result.response.statusCode == 201) {
         await onSuccess(result.data);
       } else {
         await onError(result.response.statusMessage ?? 'Unknown error');

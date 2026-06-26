@@ -13,7 +13,6 @@ enum DateFormatType {
 }
 
 extension DateTimeFormatter on DateTime {
-
   String format(DateFormatType type) {
     return DateFormat(_pattern(type)).format(this);
   }

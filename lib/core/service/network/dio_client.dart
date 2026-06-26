@@ -29,11 +29,7 @@ class DioClient {
         navigatorKey: ref.read(navigatorKeyProvider),
         dio: dio,
       ),
-      if (kDebugMode)
-        LogInterceptor(
-          requestBody: true,
-          responseBody: true,
-        ),
+      if (kDebugMode) LogInterceptor(requestBody: true, responseBody: true),
     ]);
 
     return dio;

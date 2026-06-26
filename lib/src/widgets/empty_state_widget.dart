@@ -351,7 +351,8 @@ class _EmptyStateWidgetState extends State<EmptyStateWidget>
                     child: Icon(
                       widget.icon,
                       size: widget.iconSize,
-                      color: widget.iconColor ?? cs.primary.withValues(alpha: 0.7),
+                      color:
+                          widget.iconColor ?? cs.primary.withValues(alpha: 0.7),
                     ),
                   ),
                 ),
@@ -594,9 +595,7 @@ class _PlaygroundPageState extends State<_PlaygroundPage> {
         builder: (context, constraints) {
           final wide = constraints.maxWidth > 600;
           final preview = Container(
-            color: Theme.of(
-              context,
-            ).colorScheme.surface.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.3),
             child: EmptyStateWidget(
               showIcon: showIcon,
               showPulsingRings: showRings,

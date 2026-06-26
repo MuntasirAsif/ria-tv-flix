@@ -11,4 +11,5 @@ class RouteConst {
   static const String tvScreen = '/tv_screen';
   static const String premiumScreen = '/premium_screen';
   static const String profileScreen = '/profile_screen';
+  static const String videoPlayer = '/video_player';
 }

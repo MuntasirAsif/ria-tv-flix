@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart' show FaIcon, FaIconData, FontAwesomeIcons;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'
+    show FaIcon, FaIconData, FontAwesomeIcons;
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../core/gen/assets.gen.dart';
 import '../../../../../../core/static/theme/theme.dart';
 
 class AppBottomNavBar extends StatefulWidget {
@@ -60,13 +62,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
             onDestinationSelected: _onTabChanged,
             indicatorColor: context.color.primary.withValues(alpha: 0.1),
             destinations: [
-              _navItem(
-                0,
-                FontAwesomeIcons.house,
-                'Home',
-                color,
-                currentIndex,
-              ),
+              _navItem(0, FontAwesomeIcons.house, 'Home', color, currentIndex),
               _navItem(
                 1,
                 FontAwesomeIcons.tableCellsLarge,
@@ -74,13 +70,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                 color,
                 currentIndex,
               ),
-              _navItem(
-                2,
-                FontAwesomeIcons.tv,
-                'TV',
-                color,
-                currentIndex,
-              ),
+              _navItem(2, FontAwesomeIcons.tv, 'TV', color, currentIndex),
               _navItem(
                 3,
                 FontAwesomeIcons.crown,
@@ -207,11 +197,7 @@ class _NavItemState extends State<_NavItem>
         mainAxisSize: MainAxisSize.min,
         children: [
           15.verticalSpace,
-          FaIcon(
-            widget.icon,
-            size: 22,
-            color: widget.color,
-          ),
+          FaIcon(widget.icon, size: 22, color: widget.color),
           4.verticalSpace,
           Text(
             widget.label,
@@ -266,7 +252,7 @@ class _ExitConfirmDialog extends StatelessWidget {
                   color: colorScheme.primary.withValues(alpha: 0.2),
                 ),
               ),
-              child: Image.asset("assets/icon.png", width: 28.r, height: 28.r),
+              child: Assets.images.appLogo.image(width: 28.r, height: 28.r),
             ),
             20.verticalSpace,
             Text(

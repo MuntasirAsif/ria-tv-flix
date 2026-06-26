@@ -48,7 +48,12 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Full Name', style: context.textStyle.bodyLarge.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            'Full Name',
+            style: context.textStyle.bodyLarge.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           10.verticalSpace,
           AppTextField(
             controller: _nameController,
@@ -61,7 +66,12 @@ class _SignUpFormState extends State<SignUpForm> {
             textInputAction: TextInputAction.next,
           ),
           16.verticalSpace,
-          Text('Email', style: context.textStyle.bodyLarge.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            'Email',
+            style: context.textStyle.bodyLarge.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           10.verticalSpace,
           AppTextField(
             controller: _emailController,
@@ -75,7 +85,12 @@ class _SignUpFormState extends State<SignUpForm> {
             textInputAction: TextInputAction.next,
           ),
           16.verticalSpace,
-          Text('Phone Number', style: context.textStyle.bodyLarge.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            'Phone Number',
+            style: context.textStyle.bodyLarge.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           10.verticalSpace,
           AppTextField(
             controller: _phoneController,
@@ -90,7 +105,12 @@ class _SignUpFormState extends State<SignUpForm> {
             textInputAction: TextInputAction.next,
           ),
           16.verticalSpace,
-          Text('Password', style: context.textStyle.bodyLarge.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            'Password',
+            style: context.textStyle.bodyLarge.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           10.verticalSpace,
           AppTextField(
             controller: _passwordController,
@@ -105,7 +125,12 @@ class _SignUpFormState extends State<SignUpForm> {
             textInputAction: TextInputAction.next,
           ),
           16.verticalSpace,
-          Text('Confirm Password', style: context.textStyle.bodyLarge.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            'Confirm Password',
+            style: context.textStyle.bodyLarge.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           10.verticalSpace,
           AppTextField(
             controller: _confirmPasswordController,
@@ -116,7 +141,8 @@ class _SignUpFormState extends State<SignUpForm> {
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
               (value) {
-                if (value != _passwordController.text) return 'Passwords do not match';
+                if (value != _passwordController.text)
+                  return 'Passwords do not match';
                 return null;
               },
             ]),

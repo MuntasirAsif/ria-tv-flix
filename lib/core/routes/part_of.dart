@@ -10,11 +10,13 @@ import '../../src/feature/authentication/presentation/view/signup/signup_screen.
 import '../../src/feature/authentication/presentation/view/splash/splash_screen.dart';
 
 import '../../src/feature/categories/presentation/view/categories_screen.dart';
+import '../../src/feature/home/data/model/content_model.dart';
 import '../../src/feature/home/presentation/bottom_nav_bar/view/bottom_bav_bar.dart';
 import '../../src/feature/home/presentation/home_screen/view/home_screen.dart';
 import '../../src/feature/premium/presentation/view/premium_screen.dart';
 import '../../src/feature/profile/presentation/view/profile_screen.dart';
 import '../../src/feature/tv/presentation/view/tv_screen.dart';
+import '../../src/feature/video_player/presentation/view/video_player_screen.dart';
 import '../providers/navigator_key_provider.dart';
 import 'custom_transition_page.dart';
 import 'route_const.dart';

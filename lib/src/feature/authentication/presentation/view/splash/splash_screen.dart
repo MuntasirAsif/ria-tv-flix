@@ -49,8 +49,16 @@ class _SplashScreenState extends State<SplashScreen>
                 alignment: Alignment.center,
                 children: [
                   _buildOrbitRing(280.w, Colors.blue.withValues(alpha: 0.2), 0),
-                  _buildOrbitRing(200.w, Colors.purple.withValues(alpha: 0.2), 0.3),
-                  _buildOrbitRing(120.w, Colors.teal.withValues(alpha: 0.2), 0.6),
+                  _buildOrbitRing(
+                    200.w,
+                    Colors.purple.withValues(alpha: 0.2),
+                    0.3,
+                  ),
+                  _buildOrbitRing(
+                    120.w,
+                    Colors.teal.withValues(alpha: 0.2),
+                    0.6,
+                  ),
                   Assets.images.appLogoCom.image(width: 160.w),
                 ],
               ),

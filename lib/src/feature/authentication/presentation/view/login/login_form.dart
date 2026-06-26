@@ -59,28 +59,25 @@ class SignInForm extends StatelessWidget {
           ),
           10.verticalSpace,
           AppTextField(
-                prefixIcon: Container(
-                  padding: EdgeInsets.all(const Dimensions().padding.p4.r),
-                  margin: EdgeInsets.all(const Dimensions().padding.p8.r),
-                  decoration: BoxDecoration(
-                    color: context.color.primary.withValues(alpha: 0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.lock_outlined,
-                    color: context.color.primary,
-                  ),
-                ),
-                controller: passwordController,
-                hintText: 'Enter your password',
-                enableToggleObscure: true,
-                obscureIcon: const Icon(Icons.visibility_off),
-                obscureIconOff: const Icon(Icons.visibility),
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(),
-                  FormBuilderValidators.minLength(6),
-                ]),
+            prefixIcon: Container(
+              padding: EdgeInsets.all(const Dimensions().padding.p4.r),
+              margin: EdgeInsets.all(const Dimensions().padding.p8.r),
+              decoration: BoxDecoration(
+                color: context.color.primary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
               ),
+              child: Icon(Icons.lock_outlined, color: context.color.primary),
+            ),
+            controller: passwordController,
+            hintText: 'Enter your password',
+            enableToggleObscure: true,
+            obscureIcon: const Icon(Icons.visibility_off),
+            obscureIconOff: const Icon(Icons.visibility),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(),
+              FormBuilderValidators.minLength(6),
+            ]),
+          ),
           5.verticalSpace,
           Row(
             children: [

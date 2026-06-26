@@ -9,7 +9,6 @@ import '../../data/model/login_model.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../domain/provider/auth_repository_provider.dart';
 
-
 class LoginViewModel extends StateNotifier<AsyncValue<void>> {
   final AuthRepository _authRepository;
   final CacheService _cacheService;
