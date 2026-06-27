@@ -32,49 +32,53 @@ class NormalVideoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.color.scaffoldBackground,
-      body: Column(
-        children: [
-          Container(
-            color: Colors.black,
-            child: AspectRatio(
-              aspectRatio: state.isInitialized
-                  ? controller.value.aspectRatio
-                  : 16 / 9,
-              child: _buildPlayerContent(context),
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildInfoSection(context),
-                  16.verticalSpace,
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.padding.p16.r,
-                    ),
-                    child: Divider(
-                      color: context.color.icon.withValues(alpha: 0.12),
-                      height: 1,
-                    ),
-                  ),
-                  16.verticalSpace,
-                  _buildRecommendedHeader(context),
-                  16.verticalSpace,
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.padding.p16.r,
-                    ),
-                    child: RecommendedGrid(items: recommended),
-                  ),
-                  24.verticalSpace,
-                ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final videoHeight = constraints.maxWidth *
+              (state.isInitialized
+                  ? (1 / controller.value.aspectRatio)
+                  : 9 / 16);
+          return Column(
+            children: [
+              SizedBox(
+                width: constraints.maxWidth,
+                height: videoHeight,
+                child: _buildPlayerContent(context),
               ),
-            ),
-          ),
-        ],
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildInfoSection(context),
+                      16.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.padding.p16.r,
+                        ),
+                        child: Divider(
+                          color: context.color.icon.withValues(alpha: 0.12),
+                          height: 1,
+                        ),
+                      ),
+                      16.verticalSpace,
+                      _buildRecommendedHeader(context),
+                      16.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.padding.p16.r,
+                        ),
+                        child: RecommendedGrid(items: recommended),
+                      ),
+                      24.verticalSpace,
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

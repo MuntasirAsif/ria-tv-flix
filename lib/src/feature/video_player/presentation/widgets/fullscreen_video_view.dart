@@ -56,6 +56,7 @@ class FullscreenVideoView extends StatelessWidget {
                 notifier: notifier,
                 onFullScreenToggle: onFullScreenToggle,
                 onBackPressed: onFullScreenToggle,
+                isFullScreen: true,
               ),
           ],
       ),

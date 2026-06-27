@@ -10,6 +10,7 @@ class VideoOverlay extends StatelessWidget {
   final VideoPlayerNotifier notifier;
   final VoidCallback? onFullScreenToggle;
   final VoidCallback? onBackPressed;
+  final bool isFullScreen;
 
   const VideoOverlay({
     super.key,
@@ -17,11 +18,12 @@ class VideoOverlay extends StatelessWidget {
     required this.notifier,
     this.onFullScreenToggle,
     this.onBackPressed,
+    this.isFullScreen = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    final overlay = Stack(
       children: [
         Positioned.fill(
           child: Container(
@@ -236,6 +238,15 @@ class VideoOverlay extends StatelessWidget {
           ),
       ],
     );
+
+    if (isFullScreen) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.r),
+        child: overlay,
+      );
+    }
+
+    return overlay;
   }
 
   Widget _buildSlider(BuildContext context) {
