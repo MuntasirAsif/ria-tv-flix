@@ -19,7 +19,8 @@ class CategoryThumbnail extends StatelessWidget {
       onTap: () => context.push(RouteConst.videoPlayer, extra: item),
       child: SizedBox(
         width: 110.w,
-        child: Column(
+        child: ClipRect(
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -102,6 +103,7 @@ class CategoryThumbnail extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ],
+        ),
         ),
       ),
     );

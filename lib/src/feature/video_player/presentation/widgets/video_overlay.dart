@@ -8,8 +8,16 @@ import '../view_model/video_player_view_model.dart';
 class VideoOverlay extends StatelessWidget {
   final VideoPlayerState state;
   final VideoPlayerNotifier notifier;
+  final VoidCallback? onFullScreenToggle;
+  final VoidCallback? onBackPressed;
 
-  const VideoOverlay({super.key, required this.state, required this.notifier});
+  const VideoOverlay({
+    super.key,
+    required this.state,
+    required this.notifier,
+    this.onFullScreenToggle,
+    this.onBackPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +25,7 @@ class VideoOverlay extends StatelessWidget {
       children: [
         Positioned.fill(
           child: Container(
+            padding: EdgeInsets.all(16.r),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -53,9 +62,9 @@ class VideoOverlay extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: onBackPressed ?? () => Navigator.pop(context),
                     icon: Container(
-                      padding: EdgeInsets.all(8.r),
+                      padding: EdgeInsets.all(10.r),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8.r),
@@ -67,15 +76,18 @@ class VideoOverlay extends StatelessWidget {
                       child: const FaIcon(
                         FontAwesomeIcons.arrowLeft,
                         color: Colors.white,
-                        size: 16,
+                        size: 18,
                       ),
                     ),
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () => _showSettings(context),
+                    onPressed: () {
+                      notifier.resetAutoHideTimer();
+                      _showSettings(context);
+                    },
                     icon: Container(
-                      padding: EdgeInsets.all(8.r),
+                      padding: EdgeInsets.all(10.r),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8.r),
@@ -87,7 +99,7 @@ class VideoOverlay extends StatelessWidget {
                       child: const FaIcon(
                         FontAwesomeIcons.gear,
                         color: Colors.white,
-                        size: 16,
+                        size: 18,
                       ),
                     ),
                   ),
@@ -112,7 +124,7 @@ class VideoOverlay extends StatelessWidget {
                         state.currentTime,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 11,
+                          fontSize: 12,
                         ),
                       ),
                       const Spacer(),
@@ -120,7 +132,19 @@ class VideoOverlay extends StatelessWidget {
                         state.totalTime,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 11,
+                          fontSize: 12,
+                        ),
+                      ),
+                      8.horizontalSpace,
+                      GestureDetector(
+                        onTap: () {
+                          notifier.resetAutoHideTimer();
+                          onFullScreenToggle?.call();
+                        },
+                        child: Icon(
+                          Icons.fullscreen,
+                          color: Colors.white,
+                          size: 22,
                         ),
                       ),
                     ],
@@ -136,9 +160,12 @@ class VideoOverlay extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  onPressed: () => notifier.seekRelative(-10),
+                  onPressed: () {
+                    notifier.resetAutoHideTimer();
+                    notifier.seekRelative(-10);
+                  },
                   icon: Container(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(10.r),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8.r),
@@ -150,16 +177,19 @@ class VideoOverlay extends StatelessWidget {
                     child: const FaIcon(
                       FontAwesomeIcons.rotateLeft,
                       color: Colors.white,
-                      size: 18,
+                      size: 22,
                     ),
                   ),
                 ),
                 24.horizontalSpace,
                 GestureDetector(
-                  onTap: () => notifier.togglePlayPause(),
+                  onTap: () {
+                    notifier.resetAutoHideTimer();
+                    notifier.togglePlayPause();
+                  },
                   child: Container(
-                    width: 52.r,
-                    height: 52.r,
+                    width: 60.r,
+                    height: 60.r,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: context.color.primary,
@@ -174,15 +204,18 @@ class VideoOverlay extends StatelessWidget {
                     child: Icon(
                       state.isPlaying ? Icons.pause : Icons.play_arrow,
                       color: Colors.white,
-                      size: 28,
+                      size: 32,
                     ),
                   ),
                 ),
                 24.horizontalSpace,
                 IconButton(
-                  onPressed: () => notifier.seekRelative(10),
+                  onPressed: () {
+                    notifier.resetAutoHideTimer();
+                    notifier.seekRelative(10);
+                  },
                   icon: Container(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(10.r),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8.r),
@@ -194,7 +227,7 @@ class VideoOverlay extends StatelessWidget {
                     child: const FaIcon(
                       FontAwesomeIcons.rotateRight,
                       color: Colors.white,
-                      size: 18,
+                      size: 22,
                     ),
                   ),
                 ),
@@ -233,7 +266,10 @@ class VideoOverlay extends StatelessWidget {
           ),
           child: Slider(
             value: state.sliderValue.isNaN ? 0 : state.sliderValue,
-            onChanged: (v) => notifier.seekTo(v),
+            onChanged: (v) {
+              notifier.resetAutoHideTimer();
+              notifier.seekTo(v);
+            },
           ),
         ),
       ],

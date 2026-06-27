@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:video_player/video_player.dart';
 
@@ -10,6 +12,7 @@ class VideoPlayerState {
   final double bufferedPercent;
   final String currentTime;
   final String totalTime;
+  final bool isFullScreen;
 
   const VideoPlayerState({
     this.isInitialized = false,
@@ -20,18 +23,27 @@ class VideoPlayerState {
     this.bufferedPercent = 0,
     this.currentTime = '0:00',
     this.totalTime = '0:00',
+    this.isFullScreen = false,
   });
 }
 
 class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
   final VideoPlayerController controller;
+  Timer? _autoHideTimer;
 
   VideoPlayerNotifier(this.controller) : super(const VideoPlayerState());
+
+  @override
+  void dispose() {
+    _autoHideTimer?.cancel();
+    super.dispose();
+  }
 
   void onInitialized() {
     state = VideoPlayerState(isInitialized: true, showControls: true);
     controller.play();
     controller.addListener(_onUpdate);
+    _startAutoHideTimer();
   }
 
   void _onUpdate() {
@@ -63,6 +75,7 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
       bufferedPercent: buffered.clamp(0.0, 1.0),
       currentTime: currentTime,
       totalTime: totalTime,
+      isFullScreen: state.isFullScreen,
     );
   }
 
@@ -92,16 +105,62 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
     controller.seekTo(position);
   }
 
+  void _startAutoHideTimer() {
+    _autoHideTimer?.cancel();
+    _autoHideTimer = Timer(const Duration(seconds: 4), () {
+      if (state.showControls) {
+        state = VideoPlayerState(
+          isInitialized: state.isInitialized,
+          isPlaying: state.isPlaying,
+          isBuffering: state.isBuffering,
+          showControls: false,
+          sliderValue: state.sliderValue,
+          bufferedPercent: state.bufferedPercent,
+          currentTime: state.currentTime,
+          totalTime: state.totalTime,
+          isFullScreen: state.isFullScreen,
+        );
+      }
+    });
+  }
+
+  void resetAutoHideTimer() {
+    if (state.showControls) {
+      _startAutoHideTimer();
+    }
+  }
+
   void toggleControls() {
+    final show = !state.showControls;
     state = VideoPlayerState(
       isInitialized: state.isInitialized,
       isPlaying: state.isPlaying,
       isBuffering: state.isBuffering,
-      showControls: !state.showControls,
+      showControls: show,
       sliderValue: state.sliderValue,
       bufferedPercent: state.bufferedPercent,
       currentTime: state.currentTime,
       totalTime: state.totalTime,
+      isFullScreen: state.isFullScreen,
+    );
+    if (show) {
+      _startAutoHideTimer();
+    } else {
+      _autoHideTimer?.cancel();
+    }
+  }
+
+  void toggleFullScreen() {
+    state = VideoPlayerState(
+      isInitialized: state.isInitialized,
+      isPlaying: state.isPlaying,
+      isBuffering: state.isBuffering,
+      showControls: true,
+      sliderValue: state.sliderValue,
+      bufferedPercent: state.bufferedPercent,
+      currentTime: state.currentTime,
+      totalTime: state.totalTime,
+      isFullScreen: !state.isFullScreen,
     );
   }
 }
