@@ -52,14 +52,17 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
       },
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(gradient: LinearGradient(
-            begin: Alignment.topCenter, end: Alignment.bottomCenter,
-            colors: [
-              context.color.primary.withValues(alpha: 0.06),
-              context.color.scaffoldBackground,
-              context.color.scaffoldBackground,
-            ],
-          )),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                context.color.primary.withValues(alpha: 0.06),
+                context.color.scaffoldBackground,
+                context.color.scaffoldBackground,
+              ],
+            ),
+          ),
           child: widget.navigationShell,
         ),
         bottomNavigationBar: ClipRRect(

@@ -18,7 +18,11 @@ class VideoGrid extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            FaIcon(FontAwesomeIcons.videoSlash, size: 40, color: context.color.primary.withValues(alpha: 0.3)),
+            FaIcon(
+              FontAwesomeIcons.videoSlash,
+              size: 40,
+              color: context.color.primary.withValues(alpha: 0.3),
+            ),
             12.verticalSpace,
             Text('No videos available', style: context.textStyle.bodyLarge),
           ],

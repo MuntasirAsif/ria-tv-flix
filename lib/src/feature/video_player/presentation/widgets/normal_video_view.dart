@@ -34,7 +34,8 @@ class NormalVideoView extends StatelessWidget {
       backgroundColor: context.color.scaffoldBackground,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final videoHeight = constraints.maxWidth *
+          final videoHeight =
+              constraints.maxWidth *
               (state.isInitialized
                   ? (1 / controller.value.aspectRatio)
                   : 9 / 16);

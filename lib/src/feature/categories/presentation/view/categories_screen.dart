@@ -55,7 +55,9 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen>
               children: PremiumTabBar.filters.map((filter) {
                 final items = filter == null
                     ? sampleContents
-                    : sampleContents.where((e) => e.category == filter).toList();
+                    : sampleContents
+                          .where((e) => e.category == filter)
+                          .toList();
                 return VideoGrid(items: items);
               }).toList(),
             ),

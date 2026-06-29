@@ -34,7 +34,9 @@ class ChannelCard extends StatelessWidget {
                         end: Alignment.bottomRight,
                       )
                     : null,
-                color: channel.isPremium ? null : context.color.primary.withValues(alpha: 0.06),
+                color: channel.isPremium
+                    ? null
+                    : context.color.primary.withValues(alpha: 0.06),
                 boxShadow: [
                   BoxShadow(
                     color: (channel.isPremium ? gold : context.color.primary)

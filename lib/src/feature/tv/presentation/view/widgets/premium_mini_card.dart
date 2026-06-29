@@ -38,12 +38,14 @@ class PremiumMiniCard extends StatelessWidget {
             width: 86.w,
             height: 108.h,
             fit: BoxFit.cover,
-            placeholder: (_, _) => Container(
-              color: context.color.primary.withValues(alpha: 0.04),
-            ),
+            placeholder: (_, _) =>
+                Container(color: context.color.primary.withValues(alpha: 0.04)),
             errorWidget: (_, _, _) => Container(
               color: context.color.primary.withValues(alpha: 0.04),
-              child: Icon(Icons.live_tv_rounded, color: context.color.icon.withValues(alpha: 0.3)),
+              child: Icon(
+                Icons.live_tv_rounded,
+                color: context.color.icon.withValues(alpha: 0.3),
+              ),
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 -- must use riverpod & avoid setstate
 -- must code keep clean as much as possible
--- max code in one dart file 150 lines but if is it make serious issue then keep it
+-- max code in one dart file 150 lines but if is it make serious issue then keep it & use dart format . command to recheck codes lines
 -- must use part/ or widgt/ as shown in home or authentication
+-- if any file more than 150 lines then split it & try to make it clean

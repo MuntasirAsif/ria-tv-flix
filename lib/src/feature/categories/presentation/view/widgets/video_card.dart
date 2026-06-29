@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/routes/route_const.dart';
 import '../../../../../../core/static/theme/theme.dart';
-import '../../../../../widgets/custom_network_image.dart' show CustomNetworkImage;
+import '../../../../../widgets/custom_network_image.dart'
+    show CustomNetworkImage;
 import '../../../../home/data/model/content_model.dart' show ContentModel;
 
 class VideoCard extends StatelessWidget {
@@ -37,10 +38,7 @@ class VideoCard extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    CustomNetworkImage(
-                      imageUrl: item.thumbnailUrl,
-                      radius: 0,
-                    ),
+                    CustomNetworkImage(imageUrl: item.thumbnailUrl, radius: 0),
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -63,20 +61,29 @@ class VideoCard extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: context.color.primary.withValues(alpha: 0.4),
+                              color: context.color.primary.withValues(
+                                alpha: 0.4,
+                              ),
                               blurRadius: 8.r,
                               offset: const Offset(0, 2),
                             ),
                           ],
                         ),
-                        child: FaIcon(FontAwesomeIcons.play, size: 10, color: Colors.white),
+                        child: FaIcon(
+                          FontAwesomeIcons.play,
+                          size: 10,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Positioned(
                       left: 6.r,
                       top: 6.r,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 6.r, vertical: 3.r),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 6.r,
+                          vertical: 3.r,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.black.withValues(alpha: 0.65),
                           borderRadius: BorderRadius.circular(6.r),
@@ -109,7 +116,7 @@ class VideoCard extends StatelessWidget {
           2.verticalSpace,
           Text(
             item.publishDate,
-            style:             context.textStyle.bodySmall.copyWith(
+            style: context.textStyle.bodySmall.copyWith(
               fontSize: 10.sp,
               color: context.color.text.secondary.withValues(alpha: 0.7),
             ),
