@@ -16,6 +16,7 @@ class HomeAppBar extends ConsumerWidget {
     final isSearching = ref.watch(isSearchingProvider);
 
     return AppBar(
+      backgroundColor: Colors.transparent,
       title: isSearching
           ? const HomeSearchBar()
           : Padding(

@@ -51,7 +51,17 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
         if (!didPop) await _onBackPressed();
       },
       child: Scaffold(
-        body: widget.navigationShell,
+        body: Container(
+          decoration: BoxDecoration(gradient: LinearGradient(
+            begin: Alignment.topCenter, end: Alignment.bottomCenter,
+            colors: [
+              context.color.primary.withValues(alpha: 0.06),
+              context.color.scaffoldBackground,
+              context.color.scaffoldBackground,
+            ],
+          )),
+          child: widget.navigationShell,
+        ),
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
           child: NavigationBar(

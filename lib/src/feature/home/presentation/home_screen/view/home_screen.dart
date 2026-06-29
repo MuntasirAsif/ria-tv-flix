@@ -26,6 +26,7 @@ class HomeScreen extends ConsumerWidget {
     ];
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: const HomeAppBar(),
