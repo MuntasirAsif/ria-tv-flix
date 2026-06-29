@@ -41,19 +41,9 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
       'Crystal clear ultra HD streaming',
     ),
     (
-      FontAwesomeIcons.gem,
-      'Exclusive Content',
-      'Access premium movies, series & channels',
-    ),
-    (
-      FontAwesomeIcons.wifi,
-      'Ad-Free Experience',
-      'Enjoy uninterrupted streaming',
-    ),
-    (
       FontAwesomeIcons.clapperboard,
-      '4K + HDR Quality',
-      'Crystal clear ultra HD streaming',
+      'Early Access',
+      'Watch new movies & shows first',
     ),
   ];
 
@@ -211,6 +201,41 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                   .fadeIn(duration: 600.ms)
                   .slideY(begin: -0.2),
             ),
+          ),
+          ListenableBuilder(
+            listenable: _scrollNotifier,
+            builder: (_, _) {
+              final t = _progress(_scrollNotifier.value);
+              return Opacity(
+                opacity: t,
+                child: Container(
+                  padding: EdgeInsets.only(top: 48.h),
+                  height: 88.h,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        context.color.primary,
+                        context.color.primary.withValues(alpha: 0.95),
+                      ],
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      16.horizontalSpace,
+                      Text(
+                        'Premium',
+                        style: context.textStyle.headingMedium.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
           ListenableBuilder(
             listenable: _scrollNotifier,
