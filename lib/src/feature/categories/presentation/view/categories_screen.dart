@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../home/data/model/content_model.dart';
 import '../view_model/category_provider.dart' show selectedCategoryProvider;
@@ -48,7 +49,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen>
           PremiumTabBar(
             tabController: _tabController,
             currentIndex: ref.watch(selectedCategoryProvider),
-          ),
+          ).animate().fadeIn(duration: 400.ms).slideY(begin: -0.2),
           Expanded(
             child: TabBarView(
               controller: _tabController,
@@ -58,7 +59,9 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen>
                     : sampleContents
                           .where((e) => e.category == filter)
                           .toList();
-                return VideoGrid(items: items);
+                return VideoGrid(
+                  items: items,
+                ).animate().fadeIn(duration: 500.ms);
               }).toList(),
             ),
           ),
