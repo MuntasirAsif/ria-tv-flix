@@ -115,6 +115,8 @@ class SubscriptionCard extends StatelessWidget {
                     Flexible(
                       child: Text(
                         b,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: context.textStyle.bodySmall.copyWith(
                           fontSize: 10.sp,
                           color: pop
@@ -127,33 +129,38 @@ class SubscriptionCard extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
             if (plan.isCurrent)
-              Center(
-                child: Text(
-                  'Current Plan',
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w600,
-                    color: pop ? Colors.white70 : context.color.primary,
+              Padding(
+                padding: EdgeInsets.only(top: 8.h),
+                child: Center(
+                  child: Text(
+                    'Current Plan',
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600,
+                      color: pop ? Colors.white70 : context.color.primary,
+                    ),
                   ),
                 ),
               )
             else
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 8.r),
-                decoration: BoxDecoration(
-                  color: pop ? Colors.white : context.color.primary,
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Center(
-                  child: Text(
-                    'Subscribe',
-                    style: TextStyle(
-                      fontSize: 10.sp,
-                      fontWeight: FontWeight.w700,
-                      color: pop ? Colors.black87 : Colors.white,
+              Padding(
+                padding: EdgeInsets.only(top: 8.h),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 8.r),
+                  decoration: BoxDecoration(
+                    color: pop ? Colors.white : context.color.primary,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Subscribe',
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w700,
+                        color: pop ? Colors.black87 : Colors.white,
+                      ),
                     ),
                   ),
                 ),
