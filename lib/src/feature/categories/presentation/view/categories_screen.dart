@@ -61,7 +61,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen>
                           .toList();
                 return VideoGrid(
                   items: items,
-                ).animate().fadeIn(duration: 500.ms);
+                );
               }).toList(),
             ),
           ),

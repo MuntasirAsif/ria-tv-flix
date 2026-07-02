@@ -141,8 +141,9 @@ class _SignUpFormState extends State<SignUpForm> {
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
               (value) {
-                if (value != _passwordController.text)
+                if (value != _passwordController.text) {
                   return 'Passwords do not match';
+                }
                 return null;
               },
             ]),

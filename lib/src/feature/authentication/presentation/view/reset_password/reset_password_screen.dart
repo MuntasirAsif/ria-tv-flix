@@ -114,8 +114,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
                     (value) {
-                      if (value != _passwordController.text)
+                      if (value != _passwordController.text) {
                         return 'Passwords do not match';
+                      }
                       return null;
                     },
                   ]),
