@@ -24,11 +24,11 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(child: Assets.images.appLogoCom.image(width: 200.w)),
+                    Center(child: Assets.images.appLogoCom.image(width: 300.w)),
                     10.verticalSpace,
                     Center(
                       child: Text(
-                        'Sign In',
+                        'Welcome Back',
                         style: context.textStyle.headingLarge.copyWith(
                           color: context.color.primary,
                         ),
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                     8.verticalSpace,
                     Center(
                       child: Text(
-                        'Log in to your account',
+                        'Enter your phone number to receive an OTP',
                         style: context.textStyle.bodyMedium,
                       ),
                     ),

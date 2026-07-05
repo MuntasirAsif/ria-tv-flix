@@ -14,29 +14,30 @@ class PremiumMiniCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: 90.w,
+        width: 65.w,
+        height: 65.w,
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100.r),
           gradient: const LinearGradient(
             colors: [Color(0xFFFFD700), Color(0xFFFF8C00)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(14.r),
           boxShadow: [
             BoxShadow(
               color: const Color(0xFFFFD700).withValues(alpha: 0.2),
-              blurRadius: 8.r,
+              blurRadius: 6.r,
               offset: const Offset(0, 3),
             ),
           ],
         ),
         padding: EdgeInsets.all(2.r),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(100.r),
           child: CachedNetworkImage(
             imageUrl: channel.logoUrl,
-            width: 86.w,
-            height: 108.h,
+            width: 61.w,
+            height: 61.w,
             fit: BoxFit.cover,
             placeholder: (_, _) =>
                 Container(color: context.color.primary.withValues(alpha: 0.04)),
@@ -44,6 +45,7 @@ class PremiumMiniCard extends StatelessWidget {
               color: context.color.primary.withValues(alpha: 0.04),
               child: Icon(
                 Icons.live_tv_rounded,
+                size: 16,
                 color: context.color.icon.withValues(alpha: 0.3),
               ),
             ),

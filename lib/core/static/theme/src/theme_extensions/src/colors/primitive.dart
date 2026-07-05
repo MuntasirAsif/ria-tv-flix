@@ -2,17 +2,12 @@ part of 'colors.dart';
 
 /// Primitive color palette
 class _Primitive {
-  static const Color brand = Color(0xFFd024dc);
-  static const Color brandLight = Color(0xFF2596be);
+  static const Color brand = Color(0xFF4a58fe);
+  static const Color brandLight = Color(0xFFd024dc);
   static const Color scaffoldColor = Color(0xFFFDF8F8);
   static const Color textFieldFillColor = Color(0xFFFDF8F8);
-  static const Color textFieldBorderColor = Color(0xFFEECACA);
-  static const Color textFieldFocusBorderColor = Color.fromARGB(
-    255,
-    235,
-    171,
-    171,
-  );
+  static const Color textFieldBorderColor = Color(0xFFb0b5f7);
+  static const Color textFieldFocusBorderColor = Color(0xFF8891fc);
 
   // Neutral colors
   static const Color neutral0 = Color(0xFFFFFFFF);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
@@ -8,38 +7,54 @@ import '../../../../../../core/routes/route_const.dart';
 import '../../../../../../core/static/theme/src/theme_extensions/src/dimensions.dart';
 import '../../../../../../core/static/theme/theme.dart';
 import '../../../../../widgets/app_text_field.dart';
-import '../../../../../widgets/custom_loading_indicator.dart';
-import '../../view_model/login_view_model.dart';
 
-class SignInForm extends StatelessWidget {
+class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    final formKey = GlobalKey<FormState>();
+  State<SignInForm> createState() => _SignInFormState();
+}
 
+class _SignInFormState extends State<SignInForm> {
+  final _phoneController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  void _onSendOtp() {
+    if (_formKey.currentState!.validate()) {
+      context.go(RouteConst.homeScreen);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: _formKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Email or phone number',
+            'Phone Number',
             style: context.textStyle.bodyLarge.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
           10.verticalSpace,
           AppTextField(
-            controller: emailController,
+            controller: _phoneController,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
-              FormBuilderValidators.email(),
+              FormBuilderValidators.minLength(10),
+              FormBuilderValidators.numeric(),
             ]),
-            hintText: 'Enter your email or phone number',
+            keyboardType: TextInputType.phone,
+            hintText: 'Enter your phone number',
             prefixIcon: Container(
               padding: EdgeInsets.all(const Dimensions().padding.p4.r),
               margin: EdgeInsets.all(const Dimensions().padding.p8.r),
@@ -47,90 +62,18 @@ class SignInForm extends StatelessWidget {
                 color: context.color.primary.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.email_outlined, color: context.color.primary),
+              child: Icon(Icons.phone_outlined, color: context.color.primary),
             ),
-          ),
-          16.verticalSpace,
-          Text(
-            'Password',
-            style: context.textStyle.bodyLarge.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          10.verticalSpace,
-          AppTextField(
-            prefixIcon: Container(
-              padding: EdgeInsets.all(const Dimensions().padding.p4.r),
-              margin: EdgeInsets.all(const Dimensions().padding.p8.r),
-              decoration: BoxDecoration(
-                color: context.color.primary.withValues(alpha: 0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(Icons.lock_outlined, color: context.color.primary),
-            ),
-            controller: passwordController,
-            hintText: 'Enter your password',
-            enableToggleObscure: true,
-            obscureIcon: const Icon(Icons.visibility_off),
-            obscureIconOff: const Icon(Icons.visibility),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-              FormBuilderValidators.minLength(6),
-            ]),
-          ),
-          5.verticalSpace,
-          Row(
-            children: [
-              Consumer(
-                builder: (context, ref, child) {
-                  return Checkbox(
-                    value: ref.watch(loginRememberMeProvider),
-                    onChanged: (value) {
-                      ref.read(loginRememberMeProvider.notifier).state =
-                          value ?? false;
-                    },
-                  );
-                },
-              ),
-              Text('Remember me', style: context.textStyle.bodyMedium),
-              const Spacer(),
-              GestureDetector(
-                onTap: () => context.push(RouteConst.forgotPassword),
-                child: Text(
-                  'Forgot password?',
-                  style: context.textStyle.bodyMedium.copyWith(
-                    color: context.color.primary,
-                  ),
-                ),
-              ),
-            ],
           ),
           20.verticalSpace,
-          Consumer(
-            builder: (context, ref, child) {
-              final state = ref.watch(loginViewModelProvider);
-              return SizedBox(
-                height: 48.h,
-                child: FilledButton(
-                  onPressed: () {
-                    context.go(RouteConst.homeScreen);
-                  },
-                  child: state.when(
-                    data: (data) {
-                      return const Text('Sign In');
-                    },
-                    loading: () {
-                      return const CustomLoadingIndicator();
-                    },
-                    error: (Object error, StackTrace stackTrace) {
-                      return const Text('Sign In');
-                    },
-                  ),
-                ),
-              );
-            },
+          SizedBox(
+            height: 48.h,
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: _onSendOtp,
+              child: const Text('Send OTP'),
+            ),
           ),
-          20.verticalSpace,
         ],
       ),
     );

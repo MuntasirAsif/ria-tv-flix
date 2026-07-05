@@ -265,7 +265,7 @@ class _ExitConfirmDialog extends StatelessWidget {
                   color: colorScheme.primary.withValues(alpha: 0.2),
                 ),
               ),
-              child: Assets.images.appLogo.image(width: 28.r, height: 28.r),
+              child: Assets.images.appLogoCom.image(width: 28.r, height: 28.r),
             ),
             20.verticalSpace,
             Text(

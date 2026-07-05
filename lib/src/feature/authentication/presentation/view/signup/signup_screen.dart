@@ -29,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               8.verticalSpace,
               Text(
-                'Sign up to get started',
+                'Enter your details to receive an OTP',
                 style: context.textStyle.bodyMedium,
               ),
               24.verticalSpace,

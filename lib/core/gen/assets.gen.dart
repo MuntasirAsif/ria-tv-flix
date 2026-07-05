@@ -74,6 +74,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/app_icon.png
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app_icon.png');
+
   /// File path: assets/images/app_logo.png
   AssetGenImage get appLogo =>
       const AssetGenImage('assets/images/app_logo.png');
@@ -82,8 +86,30 @@ class $AssetsImagesGen {
   AssetGenImage get appLogoCom =>
       const AssetGenImage('assets/images/app_logo_com.png');
 
+  /// Directory path: assets/images/splash
+  $AssetsImagesSplashGen get splash => const $AssetsImagesSplashGen();
+
   /// List of all assets
-  List<AssetGenImage> get values => [appLogo, appLogoCom];
+  List<AssetGenImage> get values => [appIcon, appLogo, appLogoCom];
+}
+
+class $AssetsImagesSplashGen {
+  const $AssetsImagesSplashGen();
+
+  /// File path: assets/images/splash/image 1.jpg
+  AssetGenImage get image1 =>
+      const AssetGenImage('assets/images/splash/image 1.jpg');
+
+  /// File path: assets/images/splash/image 2.png
+  AssetGenImage get image2 =>
+      const AssetGenImage('assets/images/splash/image 2.png');
+
+  /// File path: assets/images/splash/image 4.webp
+  AssetGenImage get image4 =>
+      const AssetGenImage('assets/images/splash/image 4.webp');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [image1, image2, image4];
 }
 
 class Assets {
