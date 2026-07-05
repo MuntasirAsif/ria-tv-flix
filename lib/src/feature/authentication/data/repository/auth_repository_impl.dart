@@ -9,6 +9,16 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._restClient);
 
   @override
+  Future<HttpResponse<dynamic>> sendOtp(Map<String, dynamic> request) async {
+    return await _restClient.sendOtp(request);
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> verifyOtp(Map<String, dynamic> request) async {
+    return await _restClient.verifyOtp(request);
+  }
+
+  @override
   Future<HttpResponse<dynamic>> login(Map<String, dynamic> request) async {
     return await _restClient.login(request);
   }
@@ -16,12 +26,5 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<HttpResponse<dynamic>> register(Map<String, dynamic> request) async {
     return await _restClient.register(request);
-  }
-
-  @override
-  Future<HttpResponse<dynamic>> forgotPassword(
-    Map<String, dynamic> request,
-  ) async {
-    return await _restClient.forgotPassword(request);
   }
 }

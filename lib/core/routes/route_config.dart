@@ -32,25 +32,9 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
       ),
       GoRoute(
-        path: RouteConst.forgotPassword,
-        pageBuilder: (context, state) => buildTransitionPage(
-          child: const ForgotPasswordScreen(),
-          key: state.pageKey,
-          type: AppTransitionType.rightToLeft,
-        ),
-      ),
-      GoRoute(
         path: RouteConst.otpScreen,
         pageBuilder: (context, state) => buildTransitionPage(
           child: const OtpScreen(),
-          key: state.pageKey,
-          type: AppTransitionType.rightToLeft,
-        ),
-      ),
-      GoRoute(
-        path: RouteConst.resetPassword,
-        pageBuilder: (context, state) => buildTransitionPage(
-          child: const ResetPasswordScreen(),
           key: state.pageKey,
           type: AppTransitionType.rightToLeft,
         ),

@@ -17,27 +17,22 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final bool _obscurePassword = true;
-  final bool _obscureConfirm = true;
 
   @override
   void dispose() {
     _nameController.dispose();
-    _emailController.dispose();
     _phoneController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  void _onSignUp() {
+  void _onSendOtp() {
     if (_formKey.currentState!.validate()) {
-      context.go(RouteConst.login);
+      context.push(RouteConst.otpScreen, extra: {
+        'phone': _phoneController.text,
+        'name': _nameController.text,
+      });
     }
   }
 
@@ -67,25 +62,6 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           16.verticalSpace,
           Text(
-            'Email',
-            style: context.textStyle.bodyLarge.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          10.verticalSpace,
-          AppTextField(
-            controller: _emailController,
-            hintText: 'Enter your email',
-            keyboardType: TextInputType.emailAddress,
-            prefixIcon: _buildPrefixIcon(Icons.email_outlined, context),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-              FormBuilderValidators.email(),
-            ]),
-            textInputAction: TextInputAction.next,
-          ),
-          16.verticalSpace,
-          Text(
             'Phone Number',
             style: context.textStyle.bodyLarge.copyWith(
               fontWeight: FontWeight.w600,
@@ -102,61 +78,16 @@ class _SignUpFormState extends State<SignUpForm> {
               FormBuilderValidators.minLength(10),
               FormBuilderValidators.numeric(),
             ]),
-            textInputAction: TextInputAction.next,
-          ),
-          16.verticalSpace,
-          Text(
-            'Password',
-            style: context.textStyle.bodyLarge.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          10.verticalSpace,
-          AppTextField(
-            controller: _passwordController,
-            hintText: 'Create a password',
-            obscureText: _obscurePassword,
-            enableToggleObscure: true,
-            prefixIcon: _buildPrefixIcon(Icons.lock_outlined, context),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-              FormBuilderValidators.minLength(6),
-            ]),
-            textInputAction: TextInputAction.next,
-          ),
-          16.verticalSpace,
-          Text(
-            'Confirm Password',
-            style: context.textStyle.bodyLarge.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          10.verticalSpace,
-          AppTextField(
-            controller: _confirmPasswordController,
-            hintText: 'Confirm your password',
-            obscureText: _obscureConfirm,
-            enableToggleObscure: true,
-            prefixIcon: _buildPrefixIcon(Icons.lock_outlined, context),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-              (value) {
-                if (value != _passwordController.text) {
-                  return 'Passwords do not match';
-                }
-                return null;
-              },
-            ]),
             textInputAction: TextInputAction.done,
-            onSubmitted: (_) => _onSignUp(),
+            onSubmitted: (_) => _onSendOtp(),
           ),
           30.verticalSpace,
           SizedBox(
             height: 48.h,
             width: double.infinity,
             child: FilledButton(
-              onPressed: _onSignUp,
-              child: const Text('Create Account'),
+              onPressed: _onSendOtp,
+              child: const Text('Send OTP'),
             ),
           ),
         ],

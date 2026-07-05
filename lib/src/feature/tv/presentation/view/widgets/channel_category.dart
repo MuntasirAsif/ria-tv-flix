@@ -63,7 +63,7 @@ class ChannelCategory extends StatelessWidget {
           ),
           14.verticalSpace,
           SizedBox(
-            height: 168.h,
+            height: 130.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: channels.length,
