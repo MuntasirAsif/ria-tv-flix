@@ -56,7 +56,7 @@ class TvPremiumStrip extends StatelessWidget {
         ),
         10.verticalSpace,
         SizedBox(
-          height: 112.h,
+          height: 65.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: premium.length,

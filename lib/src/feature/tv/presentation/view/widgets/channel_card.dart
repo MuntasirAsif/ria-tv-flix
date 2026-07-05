@@ -19,14 +19,14 @@ class ChannelCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: SizedBox(
-        width: 110.w,
+        width: 75.w,
         child: Column(
           children: [
             Container(
-              width: 110.w,
-              height: 110.w,
+              width: 75.w,
+              height: 75.w,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(100.r),
                 gradient: channel.isPremium
                     ? LinearGradient(
                         colors: [gold, orange, context.color.primary],
@@ -48,59 +48,59 @@ class ChannelCard extends StatelessWidget {
               ),
               padding: EdgeInsets.all(2.r),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(14.r),
+                borderRadius: BorderRadius.circular(100.r),
                 child: Stack(
                   children: [
                     CachedNetworkImage(
                       imageUrl: channel.logoUrl,
-                      width: 110.w,
-                      height: 106.w,
+                      width: 71.w,
+                      height: 71.w,
                       fit: BoxFit.cover,
                       placeholder: (_, _) => Container(
-                        width: 110.w,
-                        height: 106.w,
+                        width: 71.w,
+                        height: 71.w,
                         color: context.color.primary.withValues(alpha: 0.04),
                       ),
                       errorWidget: (_, _, _) => Container(
-                        width: 110.w,
-                        height: 106.w,
+                        width: 71.w,
+                        height: 71.w,
                         color: context.color.primary.withValues(alpha: 0.04),
                         child: Icon(
                           Icons.live_tv_rounded,
-                          size: 28,
+                          size: 20,
                           color: context.color.icon.withValues(alpha: 0.3),
                         ),
                       ),
                     ),
                     if (channel.isPremium) ...[
                       Positioned(
-                        top: 4.r,
-                        right: 4.r,
+                        top: 2.r,
+                        right: 2.r,
                         child: Container(
-                          padding: EdgeInsets.all(4.r),
+                          padding: EdgeInsets.all(3.r),
                           decoration: BoxDecoration(
                             color: gold,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
                                 color: gold.withValues(alpha: 0.5),
-                                blurRadius: 6.r,
+                                blurRadius: 4.r,
                               ),
                             ],
                           ),
                           child: FaIcon(
                             FontAwesomeIcons.crown,
-                            size: 10,
+                            size: 7,
                             color: context.color.text.primary,
                           ),
                         ),
                       ),
                       Positioned(
-                        bottom: 4.r,
-                        left: 4.r,
-                        right: 4.r,
+                        bottom: 2.r,
+                        left: 2.r,
+                        right: 2.r,
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 2.r),
+                          padding: EdgeInsets.symmetric(vertical: 1.r),
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
@@ -108,16 +108,16 @@ class ChannelCard extends StatelessWidget {
                                 orange.withValues(alpha: 0.9),
                               ],
                             ),
-                            borderRadius: BorderRadius.circular(6.r),
+                            borderRadius: BorderRadius.circular(4.r),
                           ),
                           child: Text(
                             'PREMIUM',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 7.sp,
+                              fontSize: 5.sp,
                               fontWeight: FontWeight.w700,
                               color: context.color.text.primary,
-                              letterSpacing: 1,
+                              letterSpacing: 0.5,
                             ),
                           ),
                         ),
@@ -130,19 +130,19 @@ class ChannelCard extends StatelessWidget {
             8.verticalSpace,
             Text(
               channel.name,
-              style: context.textStyle.bodySmall.copyWith(
+              style: context.textStyle.labelSmall.copyWith(
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.3,
+                fontSize: 10.sp,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
-            2.verticalSpace,
             Text(
               'CH ${channel.channelNumber}',
               style: context.textStyle.labelSmall.copyWith(
-                fontSize: 9.sp,
+                fontSize: 7.sp,
                 color: context.color.text.secondary.withValues(alpha: 0.6),
               ),
             ),

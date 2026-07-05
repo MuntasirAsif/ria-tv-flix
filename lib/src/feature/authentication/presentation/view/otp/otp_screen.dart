@@ -7,32 +7,14 @@ import '../../../../../../core/gen/assets.gen.dart';
 import '../../../../../../core/routes/route_const.dart';
 import '../../../../../../core/static/theme/theme.dart';
 
-class OtpScreen extends StatefulWidget {
+class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
 
   @override
-  State<OtpScreen> createState() => _OtpScreenState();
-}
-
-class _OtpScreenState extends State<OtpScreen> {
-  final _pinController = TextEditingController();
-  final _pinFocusNode = FocusNode();
-
-  @override
-  void dispose() {
-    _pinController.dispose();
-    _pinFocusNode.dispose();
-    super.dispose();
-  }
-
-  void _onVerify() {
-    if (_pinController.text.length == 4) {
-      context.push(RouteConst.resetPassword);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final pinController = TextEditingController();
+    final pinFocusNode = FocusNode();
+
     final defaultPinTheme = PinTheme(
       width: 60.w,
       height: 60.h,
@@ -64,14 +46,14 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               8.verticalSpace,
               Text(
-                'Enter the 4-digit code sent to your email',
+                'Enter the 4-digit code sent to your phone',
                 textAlign: TextAlign.center,
                 style: context.textStyle.bodyMedium,
               ),
               40.verticalSpace,
               Pinput(
-                controller: _pinController,
-                focusNode: _pinFocusNode,
+                controller: pinController,
+                focusNode: pinFocusNode,
                 length: 4,
                 defaultPinTheme: defaultPinTheme,
                 focusedPinTheme: defaultPinTheme.copyDecorationWith(
@@ -80,7 +62,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 submittedPinTheme: defaultPinTheme.copyDecorationWith(
                   border: Border.all(color: context.color.success),
                 ),
-                onCompleted: (_) => _onVerify(),
+                onCompleted: (_) => context.go(RouteConst.homeScreen),
                 pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
               ),
               30.verticalSpace,
@@ -88,7 +70,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: 48.h,
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: _onVerify,
+                  onPressed: () => context.go(RouteConst.homeScreen),
                   child: const Text('Verify'),
                 ),
               ),
